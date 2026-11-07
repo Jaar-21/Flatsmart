@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081326"/>
+      <stop offset="50%" stop-color="#0F2447"/>
+      <stop offset="100%" stop-color="#163866"/>
+    </linearGradient>
+
+    <!-- Text Gradient for Flat -->
+    <linearGradient id="flatGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+
+    <!-- Text Gradient for Smart -->
+    <linearGradient id="smartGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+
+    <!-- Accent Glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <radialGradient id="radialGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#081326" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background with rounded corners -->
+  <rect width="1000" height="280" rx="20" fill="url(#bgGrad)"/>
+  <rect width="1000" height="280" rx="20" fill="url(#radialGlow)"/>
+
+  <!-- Border -->
+  <rect width="996" height="276" x="2" y="2" rx="18" fill="none" stroke="#2563EB" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- Decorative Tech Circles & Grid -->
+  <g opacity="0.12" stroke="#60A5FA" stroke-width="1">
+    <line x1="60" y1="0" x2="60" y2="280"/>
+    <line x1="940" y1="0" x2="940" y2="280"/>
+    <line x1="0" y1="50" x2="1000" y2="50"/>
+    <line x1="0" y1="230" x2="1000" y2="230"/>
+    <circle cx="100" cy="140" r="60" fill="none"/>
+    <circle cx="900" cy="140" r="60" fill="none"/>
+  </g>
+
+  <!-- Glowing Cart Icon Left -->
+  <g transform="translate(130, 80) scale(1.3)" filter="url(#glow)">
+    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="#38BDF8"/>
+  </g>
+
+  <!-- Glowing Title: FlatSmart -->
+  <g text-anchor="middle">
+    <text x="510" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="76" font-weight="900" letter-spacing="1">
+      <tspan fill="url(#flatGrad)" filter="url(#glow)">Flat</tspan><tspan fill="url(#smartGrad)">Smart</tspan>
+    </text>
+
+    <!-- Tagline -->
+    <text x="510" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#93C5FD" letter-spacing="3">
+      SISTEM INFORMASI OPERASIONAL MINIMARKET &amp; DECISION SUPPORT
+    </text>
+
+    <!-- Subtitle -->
+    <text x="510" y="193" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#CBD5E1" letter-spacing="1">
+      Java 17 LTS • Java Swing (NetBeans) • MySQL • Figma • GitHub
+    </text>
+
+    <!-- Interactive Badges Pill Box inside SVG -->
+    <g transform="translate(510, 235)">
+      <!-- Pill 1: POS -->
+      <g transform="translate(-320, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1"/>
+        <text y="4" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#93C5FD">⚡ POS Kasir</text>
+      </g>
+      <!-- Pill 2: Smart FIFO -->
+      <g transform="translate(-160, 0)">
+        <rect x="-75" y="-14" width="150" height="26" rx="13" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1"/>
+        <text y="4" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#93C5FD">🔄 Smart FIFO</text>
+      </g>
+      <!-- Pill 3: Promosi Batch -->
+      <g transform="translate(10, 0)">
+        <rect x="-80" y="-14" width="160" height="26" rx="13" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1"/>
+        <text y="4" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#93C5FD">🎯 Diskon Batch</text>
+      </g>
+      <!-- Pill 4: Analytics KPI -->
+      <g transform="translate(180, 0)">
+        <rect x="-75" y="-14" width="150" height="26" rx="13" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1"/>
+        <text y="4" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#93C5FD">📊 Analisis Omzet</text>
+      </g>
+      <!-- Pill 5: Export Excel -->
+      <g transform="translate(330, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#10B981" stroke="#059669" stroke-width="1"/>
+        <text y="4" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">📑 Export .xlsx</text>
+      </g>
+    </g>
+  </g>
+</svg>

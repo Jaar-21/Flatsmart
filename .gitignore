@@ -1,0 +1,15 @@
+# Hasil build Maven / NetBeans
+target/
+build/
+dist/
+nbproject/private/
+.nb-gradle/
+
+# Bytecode & log
+*.class
+*.log
+
+# Cache editor
+.idea/
+*.iml
+.vscode/
