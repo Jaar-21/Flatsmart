@@ -763,8 +763,21 @@ Proyek ini dikembangkan oleh tim mahasiswa **Program Studi Sistem Informasi, Fak
 | 👤 **Use Case Diagram** | [drive.google.com/drive/folders/191ByG-RcuFYbZ3L6oPVThB8f-ebXtkcf](https://drive.google.com/drive/folders/191ByG-RcuFYbZ3L6oPVThB8f-ebXtkcf) |
 | 🗄️ **ERD (Logical & Relational)** | [drive.google.com/drive/folders/1WSCBtMvzfYsx3itwGsx9gdf_9eJG6pYx](https://drive.google.com/drive/folders/1WSCBtMvzfYsx3itwGsx9gdf_9eJG6pYx) |
 
+---
+
+<!-- ============================== FOOTER ============================== -->
 <div align="center">
-  <br/>
-  <b>FlatSmart v1.0 — Capstone Pemrograman Berorientasi Objek & Praktikum Sistem Basis Data</b><br/>
-  <i>Developed with Java 17, Apache NetBeans, Swing, MySQL, Figma, and GitHub</i>
+
+<a href="#nama-program">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=15&pause=1400&color=38BDF8&center=true&vCenter=true&width=700&lines=Terima+kasih+telah+berbelanja+di+FlatSmart+%F0%9F%9B%92;Kasir+cepat%2C+analisis+tepat.+%F0%9F%93%8A;Kelompok+9+%E2%80%A2+Universitas+Mulawarman+2026" alt="Terima kasih telah berbelanja di FlatSmart"/>
+</a>
+
+<br/>
+
+<img src="docs/gambar/footer-flatsmart.svg" alt="Footer FlatSmart — Kelompok 9" width="100%"/>
+
+<br/><br/>
+
+<a href="#nama-program"><b>⬆️ Kembali ke atas</b></a>
+
 </div>

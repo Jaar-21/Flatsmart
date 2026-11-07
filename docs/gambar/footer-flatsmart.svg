@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="100%" height="100%" role="img" aria-labelledby="ftTitle ftDesc" font-family="Segoe UI, Trebuchet MS, Arial, sans-serif">
+  <title id="ftTitle">Footer FlatSmart — Kelompok 9</title>
+  <desc id="ftDesc">Footer animasi bernuansa navy: struk kasir tercetak dengan laser pemindai barcode dan grafik batang analisis omzet.</desc>
+
+  <defs>
+    <linearGradient id="ftBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050E1C"/>
+      <stop offset="55%" stop-color="#0A1A31"/>
+      <stop offset="100%" stop-color="#13305A"/>
+    </linearGradient>
+
+    <linearGradient id="ftHeadline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#BFDBFE"/>
+    </linearGradient>
+
+    <linearGradient id="ftBar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+
+    <linearGradient id="ftBarHot" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+
+    <radialGradient id="ftGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+
+    <pattern id="ftGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#1E3A8A" stroke-width="1" stroke-opacity="0.35"/>
+    </pattern>
+
+    <clipPath id="ftCard"><rect width="1000" height="300" rx="24"/></clipPath>
+    <clipPath id="ftReceiptClip"><rect x="70" y="70" width="140" height="180"/></clipPath>
+
+    <filter id="ftShadow" x="-40%" y="-20%" width="180%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <filter id="ftLaser" x="-20%" y="-300%" width="140%" height="700%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#ftCard)">
+    <rect width="1000" height="300" fill="url(#ftBg)"/>
+    <rect width="1000" height="300" fill="url(#ftGrid)" opacity="0.35"/>
+    <circle cx="480" cy="150" r="270" fill="url(#ftGlow)">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- ============ ILUSTRASI STRUK KASIR ============ -->
+    <g clip-path="url(#ftReceiptClip)">
+      <g>
+        <animateTransform attributeName="transform" type="translate" from="0 -170" to="0 0" dur="1.6s" begin="0.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.9 0.2 1"/>
+
+        <path d="M76 80 H196 V222 L190 216 L184 222 L178 216 L172 222 L166 216 L160 222 L154 216 L148 222 L142 216 L136 222 L130 216 L124 222 L118 216 L112 222 L106 216 L100 222 L94 216 L88 222 L82 216 L76 222 Z" fill="#F4F8FF" filter="url(#ftShadow)"/>
+
+        <text x="136" y="96" text-anchor="middle" font-size="8" font-weight="800" letter-spacing="1.2" fill="#0F2447">FLATSMART</text>
+        <text x="136" y="105" text-anchor="middle" font-size="4.5" letter-spacing="1.6" fill="#64748B">MINIMARKET</text>
+
+        <line x1="84" y1="112" x2="188" y2="112" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3 2"/>
+
+        <rect x="84" y="119" width="58" height="4" rx="2" fill="#CBD5E1"/>
+        <rect x="166" y="119" width="20" height="4" rx="2" fill="#94A3B8"/>
+        <rect x="84" y="129" width="46" height="4" rx="2" fill="#CBD5E1"/>
+        <rect x="172" y="129" width="14" height="4" rx="2" fill="#94A3B8"/>
+        <rect x="84" y="139" width="54" height="4" rx="2" fill="#CBD5E1"/>
+        <rect x="168" y="139" width="18" height="4" rx="2" fill="#94A3B8"/>
+
+        <line x1="84" y1="150" x2="188" y2="150" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3 2"/>
+
+        <text x="84" y="160" font-size="6" font-weight="700" letter-spacing="0.8" fill="#475569">TOTAL</text>
+        <text x="188" y="160" text-anchor="end" font-size="6.5" font-weight="800" fill="#0F2447">Rp 87.500</text>
+
+        <!-- Barcode -->
+        <g fill="#0F2447">
+          <rect x="84" y="168" width="2" height="20"/>
+          <rect x="87" y="168" width="1" height="20"/>
+          <rect x="89" y="168" width="3" height="20"/>
+          <rect x="93" y="168" width="1" height="20"/>
+          <rect x="95" y="168" width="2" height="20"/>
+          <rect x="98" y="168" width="1" height="20"/>
+          <rect x="100" y="168" width="3" height="20"/>
+          <rect x="104" y="168" width="2" height="20"/>
+          <rect x="107" y="168" width="1" height="20"/>
+          <rect x="109" y="168" width="2" height="20"/>
+          <rect x="112" y="168" width="1" height="20"/>
+          <rect x="114" y="168" width="3" height="20"/>
+          <rect x="118" y="168" width="1" height="20"/>
+          <rect x="120" y="168" width="3" height="20"/>
+          <rect x="124" y="168" width="1" height="20"/>
+          <rect x="126" y="168" width="2" height="20"/>
+          <rect x="129" y="168" width="1" height="20"/>
+          <rect x="131" y="168" width="3" height="20"/>
+          <rect x="135" y="168" width="2" height="20"/>
+          <rect x="138" y="168" width="1" height="20"/>
+          <rect x="140" y="168" width="3" height="20"/>
+          <rect x="144" y="168" width="1" height="20"/>
+          <rect x="146" y="168" width="2" height="20"/>
+          <rect x="149" y="168" width="1" height="20"/>
+          <rect x="151" y="168" width="3" height="20"/>
+          <rect x="155" y="168" width="2" height="20"/>
+          <rect x="158" y="168" width="1" height="20"/>
+          <rect x="160" y="168" width="2" height="20"/>
+          <rect x="163" y="168" width="1" height="20"/>
+          <rect x="165" y="168" width="3" height="20"/>
+          <rect x="169" y="168" width="1" height="20"/>
+          <rect x="171" y="168" width="2" height="20"/>
+          <rect x="174" y="168" width="1" height="20"/>
+          <rect x="176" y="168" width="3" height="20"/>
+          <rect x="180" y="168" width="2" height="20"/>
+          <rect x="183" y="168" width="1" height="20"/>
+          <rect x="185" y="168" width="3" height="20"/>
+        </g>
+
+        <text x="136" y="199" text-anchor="middle" font-size="4.5" letter-spacing="1" fill="#64748B">TERIMA KASIH &#183; K9</text>
+
+        <!-- Laser pemindai -->
+        <rect x="82" y="166" width="108" height="2" rx="1" fill="#38BDF8" filter="url(#ftLaser)">
+          <animate attributeName="y" values="166;190;190;166" keyTimes="0;0.4;0.6;1" dur="2.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.08;0.92;1" dur="2.8s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+
+    <!-- Printer / mesin kasir -->
+    <rect x="56" y="54" width="160" height="18" rx="6" fill="#163866" stroke="#3B82F6" stroke-opacity="0.55"/>
+    <rect x="68" y="70" width="136" height="4" rx="2" fill="#040B16"/>
+    <circle cx="204" cy="63" r="2.5" fill="#38BDF8">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- ============ TEKS UTAMA ============ -->
+    <g text-anchor="middle">
+      <rect x="405" y="84" width="150" height="26" rx="13" fill="#38BDF8" fill-opacity="0.12" stroke="#38BDF8" stroke-opacity="0.4"/>
+      <text x="480" y="101" font-size="10" font-weight="700" letter-spacing="2.6" fill="#7DD3FC">KELOMPOK 9</text>
+
+      <text x="480" y="149" font-size="26" font-weight="800" letter-spacing="0.5" fill="#F1F6FF">KASIR CEPAT.</text>
+      <text x="480" y="181" font-size="26" font-weight="800" letter-spacing="0.5" fill="url(#ftHeadline)">ANALISIS TEPAT.</text>
+
+      <text x="480" y="207" font-size="10.5" font-weight="400" fill="#93A9C9">FlatSmart &#8212; Sistem Informasi Operasional Minimarket &amp; Decision Support System</text>
+
+      <line x1="420" y1="222" x2="462" y2="222" stroke="#1E3A8A" stroke-width="1"/>
+      <rect x="477.5" y="219.5" width="5" height="5" transform="rotate(45 480 222)" fill="#38BDF8" fill-opacity="0.85"/>
+      <line x1="498" y1="222" x2="540" y2="222" stroke="#1E3A8A" stroke-width="1"/>
+
+      <text x="480" y="241" font-size="9" letter-spacing="0.6" fill="#6B84A6">Program Studi Sistem Informasi &#183; Fakultas Teknik &#183; Universitas Mulawarman</text>
+    </g>
+
+    <!-- ============ KARTU ANALISIS ============ -->
+    <rect x="700" y="60" width="260" height="182" rx="14" fill="#0B1B33" fill-opacity="0.72" stroke="#2563EB" stroke-opacity="0.55"/>
+    <text x="720" y="86" font-size="8.5" font-weight="700" letter-spacing="2" fill="#7DD3FC">ANALISIS OMZET</text>
+    <text x="940" y="86" text-anchor="end" font-size="7.5" letter-spacing="1.5" fill="#5B7395">7 HARI</text>
+
+    <text x="720" y="109" font-size="15" font-weight="800" fill="#F1F6FF">Rp 12,4 jt</text>
+    <text x="806" y="109" font-size="9" font-weight="700" fill="#34D399">+18%</text>
+
+    <g stroke="#1E3A8A" stroke-opacity="0.6" stroke-width="1" stroke-dasharray="3 4">
+      <line x1="720" y1="134" x2="940" y2="134"/>
+      <line x1="720" y1="160" x2="940" y2="160"/>
+      <line x1="720" y1="186" x2="940" y2="186"/>
+    </g>
+    <line x1="720" y1="212" x2="940" y2="212" stroke="#26456F" stroke-width="1"/>
+
+    <!-- Batang omzet -->
+    <rect x="732" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;182;182;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.1s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;30;30;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.1s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="762" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;166;166;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.2s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;46;46;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="792" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;174;174;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.3s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;38;38;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.3s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="822" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;150;150;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.4s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;62;62;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="852" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;160;160;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;52;52;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="882" y="212" width="16" height="0" rx="3" fill="url(#ftBar)">
+      <animate attributeName="y" values="212;134;134;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.6s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;78;78;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.6s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="912" y="212" width="16" height="0" rx="3" fill="url(#ftBarHot)">
+      <animate attributeName="y" values="212;146;146;212" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.7s" repeatCount="indefinite"/>
+      <animate attributeName="height" values="0;66;66;0" keyTimes="0;0.32;0.86;1" dur="7s" begin="0.7s" repeatCount="indefinite"/>
+    </rect>
+
+    <g font-size="6.5" fill="#4B6285" text-anchor="middle">
+      <text x="740" y="226">Sen</text>
+      <text x="770" y="226">Sel</text>
+      <text x="800" y="226">Rab</text>
+      <text x="830" y="226">Kam</text>
+      <text x="860" y="226">Jum</text>
+      <text x="890" y="226">Sab</text>
+      <text x="920" y="226">Min</text>
+    </g>
+
+    <!-- ============ STRIP BAWAH ============ -->
+    <line x1="60" y1="266" x2="940" y2="266" stroke="#163866" stroke-width="1"/>
+    <text x="500" y="285" text-anchor="middle" font-size="8.5" letter-spacing="0.8" fill="#5B7395">&#169; 2026 Kelompok 9 &#183; FlatSmart v1.0 &#183; Java 17 &#183; Java Swing &#183; MySQL 8</text>
+  </g>
+
+  <rect x="2" y="2" width="996" height="296" rx="22" fill="none" stroke="#2563EB" stroke-opacity="0.45"/>
+</svg>
