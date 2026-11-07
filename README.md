@@ -734,12 +734,12 @@ Proyek ini dikembangkan oleh tim mahasiswa **Program Studi Sistem Informasi, Fak
 
 <div align="center">
 
-| Foto / Avatar | Nama Lengkap | NIM | Tugas yang Dikerjakan |
-|:---:|---|:---:|---|
-| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Fajar" width="65"/> | **Ahmad Fajar Novia** | `2509116041` | • Membuat konsep program dan alur sistem (Flowchart).<br/>• Membuat seluruh program aplikasi beserta tampilannya.<br/>• Membuat struktur awal database (perintah create tabel dan insert data awal).<br/>• Menyusun dokumentasi README aplikasi. |
-| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Farah" width="65"/> | **Farah Hikmatul Maula** | `2509116099` | • Menyusun Laporan.<br/>• Membuat PPT (slide presentasi).<br/>• Membuat ERD (Entity Relationship Diagram).<br/>• Membuat query database: DDL, DML, relasi JOIN, dan select tingkat lanjut 1. |
-| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Marza" width="65"/> | **Marza Hanaya Melodya Goga** | `2409116103` | • Menyusun Laporan.<br/>• Membuat PPT (slide presentasi).<br/>• Membuat ERD (Entity Relationship Diagram).<br/>• Membuat query database: select tingkat lanjut 2. |
-| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Harits" width="65"/> | **Harits** | `2509116048` | • Membantu sedikit pembuatan program aplikasi.<br/>• Menyusun Laporan.<br/>• Membuat PPT (slide presentasi).<br/>• Membuat Use Case Diagram. |
+| Foto / Avatar | Nama Lengkap | NIM | Angkatan |
+|:---:|---|:---:|:---:|
+| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Fajar" width="65"/> | **Ahmad Fajar Novia** | `2509116041` | 2025 |
+| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Farah" width="65"/> | **Farah Hikmatul Maula** | `2509116099` | 2025 |
+| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Marza" width="65"/> | **Marza Hanaya Melodya Goga** | `2409116103` | 2024 |
+| <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Harits" width="65"/> | **Harits** | `2509116048` | 2025 |
 
 </div>
 
