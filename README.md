@@ -61,7 +61,6 @@
 **Solusi Perangkat Lunak Desktop Terintegrasi Berbasis Java SE 17, Java Swing, dan MySQL**  
 *Dikembangkan oleh Mahasiswa Program Studi Sistem Informasi • Fakultas Teknik • Universitas Mulawarman (2026)*
 
-`Versi 1.0 (Capstone Release)` • `Arsitektur 5-Layer MVC + DAO Pattern` • `Custom Connection Pool Engine` • `Offline-First Desktop App`
 
 </div>
 
