@@ -27,10 +27,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-/**
- * Pemasang kalender di atas JTextField tanggal, pengganti isian manual.
- * Dipakai karena proyek ini tidak menambah dependensi eksternal baru.
- */
 public final class PilihTanggal {
 
     private static final Locale ID = Locale.forLanguageTag("id-ID");
@@ -39,16 +35,13 @@ public final class PilihTanggal {
     private static final String[] HARI = {"Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"};
     private static final Color AKSEN = new Color(16, 40, 79);
 
-    // konstruktor privat
     private PilihTanggal() {
     }
 
-    /** Membuat kolom hanya-baca dan memunculkan kalender saat diklik. */
     public static void pasang(JTextField kolom) {
         pasang(kolom, null);
     }
 
-    // pasang kalender ke kolom
     public static void pasang(JTextField kolom, Runnable setelahPilih) {
         kolom.setEditable(false);
         kolom.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -62,14 +55,12 @@ public final class PilihTanggal {
         kolom.add(ikon);
         tempatkanIkon(kolom, ikon);
         kolom.addComponentListener(new ComponentAdapter() {
-            // sesuaikan ikon saat resized
             @Override public void componentResized(ComponentEvent e) {
                 tempatkanIkon(kolom, ikon);
             }
         });
 
         MouseAdapter buka = new MouseAdapter() {
-            // buka kalender saat diklik
             @Override public void mousePressed(MouseEvent e) {
                 tampilkanKalender(kolom, setelahPilih);
             }
@@ -78,13 +69,11 @@ public final class PilihTanggal {
         ikon.addMouseListener(buka);
     }
 
-    // tempatkan ikon kalender
     private static void tempatkanIkon(JTextField kolom, JLabel ikon) {
         int tinggi = Math.max(16, kolom.getHeight() - 10);
         ikon.setBounds(kolom.getWidth() - tinggi - 8, 5, tinggi, tinggi);
     }
 
-    // tampilkan popup kalender
     private static void tampilkanKalender(JTextField kolom, Runnable setelahPilih) {
         LocalDate awal;
         try {
@@ -104,7 +93,6 @@ public final class PilihTanggal {
         popup.show(kolom, 0, kolom.getHeight());
     }
 
-    /** Isi popup: navigasi bulan dan kisi tanggal. */
     private static final class Kalender extends JPanel {
 
         private final LocalDate acuan;
@@ -112,7 +100,6 @@ public final class PilihTanggal {
         private LocalDate bulan;
         private final JPanel kisi = new JPanel(new GridLayout(0, 7, 2, 2));
 
-        // konstruktor kalender
         Kalender(LocalDate acuan, java.util.function.Consumer<LocalDate> pilih) {
             this.acuan = acuan;
             this.pilih = pilih;
@@ -126,7 +113,6 @@ public final class PilihTanggal {
             gambarUlang();
         }
 
-        // panel kepala kalender
         private JPanel kepala() {
             JPanel panel = new JPanel(new BorderLayout(4, 0));
             panel.setOpaque(false);
@@ -142,7 +128,6 @@ public final class PilihTanggal {
             return panel;
         }
 
-        // tombol navigasi bulan
         private JButton tombolNav(String teks, int geserBulan) {
             JButton tombol = new JButton(teks);
             tombol.setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -163,7 +148,6 @@ public final class PilihTanggal {
             return tombol;
         }
 
-        // gambar ulang kisi tanggal
         private void gambarUlang() {
             kisi.setOpaque(false);
             kisi.removeAll();
@@ -180,7 +164,6 @@ public final class PilihTanggal {
             }
         }
 
-        // label kecil hari
         private JLabel labelKecil(String teks, Color warna, boolean tebal) {
             JLabel label = new JLabel(teks, SwingConstants.CENTER);
             label.setFont(new Font("Segoe UI", tebal ? Font.BOLD : Font.PLAIN, 10));
@@ -188,7 +171,6 @@ public final class PilihTanggal {
             return label;
         }
 
-        // tombol sel tanggal
         private JButton sel(LocalDate tanggal, boolean bulanIni, boolean hariIni, boolean terpilih) {
             JButton sel = new JButton(String.valueOf(tanggal.getDayOfMonth()));
             sel.setFont(new Font("Segoe UI", hariIni || terpilih ? Font.BOLD : Font.PLAIN, 11));
@@ -209,17 +191,14 @@ public final class PilihTanggal {
 
     private static final class IkonKalender implements Icon {
 
-        // lebar ikon
         @Override public int getIconWidth() {
             return 16;
         }
 
-        // tinggi ikon
         @Override public int getIconHeight() {
             return 16;
         }
 
-        // gambar ikon kalender
         @Override public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

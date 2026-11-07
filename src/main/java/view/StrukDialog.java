@@ -3,12 +3,8 @@ package view;
 import java.awt.print.PrinterException;
 import util.Pesan;
 
-/**
- * Struk lengkap satu transaksi, dipakai layar Riwayat Transaksi.
- */
 public class StrukDialog extends javax.swing.JDialog {
 
-    // layar struk
     public StrukDialog(java.awt.Window parent, String judul, String isi) {
         super(parent, judul, java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         initComponents();
@@ -23,7 +19,6 @@ public class StrukDialog extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
     }
 
-    /** This method is called from within the constructor to initialize the form. */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -100,12 +95,10 @@ public class StrukDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // tombol tutup
     private void btnTutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutupActionPerformed
         dispose();
     }//GEN-LAST:event_btnTutupActionPerformed
 
-    // cetak struk
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         try {
             java.text.MessageFormat header =
@@ -118,7 +111,6 @@ public class StrukDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCetakActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnTutup;
     private javax.swing.JLabel lblJudul;
@@ -127,5 +119,4 @@ public class StrukDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JScrollPane scrollStruk;
     private javax.swing.JTextArea txtStruk;
-    // End of variables declaration//GEN-END:variables
 }

@@ -16,17 +16,14 @@ public class PromosiService {
     private final PromosiDAO promosiDAO = new PromosiDAO();
     private final StokDAO stokDAO = new StokDAO();
 
-    // kode promosi baru
     public String buatKode() throws SQLException {
         return promosiDAO.buatKodeBerikutnya();
     }
 
-    // cari promosi
     public List<Promosi> cari(String keyword, LocalDate tanggal) throws SQLException {
         return promosiDAO.cari(keyword, tanggal);
     }
 
-    // simpan promosi baru
     public void simpanBaru(String kode, String nama, String idStok, int diskonPersen,
                            LocalDate mulai, LocalDate selesai) throws SQLException {
         validasi(nama, idStok, diskonPersen, mulai, selesai);
@@ -42,7 +39,6 @@ public class PromosiService {
         });
     }
 
-    // ubah promosi
     public void ubah(String kode, String nama, String idStok, int diskonPersen,
                      LocalDate mulai, LocalDate selesai) throws SQLException {
         validasi(nama, idStok, diskonPersen, mulai, selesai);
@@ -55,7 +51,6 @@ public class PromosiService {
         });
     }
 
-    // hapus promosi
     public void hapus(String kode) throws SQLException {
         DatabaseConnection.transaction(() -> {
             stokDAO.lepasPromosi(kode);
@@ -64,27 +59,22 @@ public class PromosiService {
         });
     }
 
-    // batch per produk
     public List<Stok> cariBatch(String barcode) throws SQLException {
         return stokDAO.cariByBarcode(barcode);
     }
 
-    // hitung total promosi
     public int hitungTotal() throws SQLException {
         return promosiDAO.hitungTotal();
     }
 
-    // hitung batch bertarget
     public int hitungBatchTarget() throws SQLException {
         return promosiDAO.hitungBatchTarget();
     }
 
-    // hitung batch menipis
     public int hitungBatchDekatKedaluwarsa() throws SQLException {
         return stokDAO.hitungDekatKedaluwarsa(StokDAO.HARI_DEKAT_KEDALUWARSA);
     }
 
-    // cek kode promosi ada
     private boolean ada(String kode) throws SQLException {
         return Boolean.TRUE.equals(DatabaseConnection.query(
                 "SELECT 1 FROM promosi WHERE kode_promosi = ?", ps -> {
@@ -95,7 +85,6 @@ public class PromosiService {
                 }));
     }
 
-    // validasi data promosi
     private void validasi(String nama, String idStok, int diskonPersen,
                           LocalDate mulai, LocalDate selesai) {
         if (nama == null || nama.isBlank()) {

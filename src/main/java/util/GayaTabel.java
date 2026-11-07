@@ -20,12 +20,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
-/**
- * Penataan visual tabel daftar: zebra baris, header gelap, dan kolom Aksi yang
- * berisi dua tombol digambar per sel. Tombolnya bukan JButton sungguhan; klik
- * dikenali dari posisi pointer di dalam sel, jadi fokus tabel tidak pernah pindah
- * dan tidak ada editor sel yang perlu di-commit.
- */
 public final class GayaTabel {
 
     public static final int UBAH = 0;
@@ -48,14 +42,9 @@ public final class GayaTabel {
     private static final int JARAK = 8;
     private static final int BANTAL = 10;
 
-    // konstruktor privat util
     private GayaTabel() {
     }
 
-    /**
-     * Gaya dasar seluruh kolom. Nomor kolom di {@code rataKanan} jadi rata kanan
-     * (nominal rupiah), nomor di {@code rataTengah} jadi rata tengah (status/tanggal).
-     */
     public static void rapikan(JTable tabel, int[] rataKanan, int[] rataTengah) {
         tabel.setRowHeight(TINGGI_BARIS);
         tabel.setShowGrid(false);
@@ -78,18 +67,10 @@ public final class GayaTabel {
                     : mengandung(rataTengah, i) ? SwingConstants.CENTER
                             : SwingConstants.LEFT;
             tabel.getColumnModel().getColumn(i).setCellRenderer(new IsiSel(arah));
-            // judul kolom memakai arah yang sama dengan isinya agar tidak tampak geser
             tabel.getColumnModel().getColumn(i).setHeaderRenderer(new KepalaSel(arah));
         }
     }
 
-    /**
-     * Mengubah kolom berjudul {@code judul} menjadi lajur tombol aksi yang ikut
-     * menandai baris saat pointer melewatinya. Dua tombol (Ubah & Hapus) dipasang
-     * bila judul tombol tidak diberikan.
-     *
-     * @return index kolom tersebut, atau -1 bila judulnya tidak ada
-     */
     public static int pasangAksi(JTable tabel, String judul, String... label) {
         final int kolom = kolomBernama(tabel, judul);
         if (kolom < 0) {
@@ -98,7 +79,6 @@ public final class GayaTabel {
         final AksiSel renderer = new AksiSel(label.length == 0
                 ? new String[]{"Ubah", "Hapus"} : label);
         tabel.getColumnModel().getColumn(kolom).setCellRenderer(renderer);
-        // tombol aksi mepet ke kanan sel, jadi judulnya ikut ke kanan
         tabel.getColumnModel().getColumn(kolom).setHeaderRenderer(
                 new KepalaSel(SwingConstants.RIGHT));
         final int[] terakhir = {-1, -1};
@@ -117,14 +97,6 @@ public final class GayaTabel {
         return kolom;
     }
 
-    /**
-     * Lebar kolom sesuai rancangan, tapi selalu diratakan Swing ke lebar area
-     * gulung (AUTO_RESIZE_ALL_COLUMNS). Angka di bawah jadi patokan proporsi, bukan
-     * harga mati: kolom melebar/menyempit sedikit agar tabel menutupi viewport
-     * persis, jadi tidak ada pita kosong di kanan dan tidak ada scrollbar horizontal.
-     * Total rancangan sengaja dibuat tidak melebihi viewport supaya kolom Aksi tidak
-     * pernah diremukkan di bawah lebar tombolnya.
-     */
     public static void aturLebar(JTable tabel, int[] lebar) {
         javax.swing.table.TableColumnModel model = tabel.getColumnModel();
         for (int i = 0; i < model.getColumnCount() && i < lebar.length; i++) {
@@ -135,12 +107,10 @@ public final class GayaTabel {
                 new Dimension(Math.max(totalLebar(tabel), 400), 34));
     }
 
-    /** Lebar minimum kolom Aksi agar seluruh tombol tampil penuh. */
     public static int lebarMinimumAksi(int jumlahTombol) {
         return LEBAR_TOMBOL * jumlahTombol + JARAK * (jumlahTombol - 1) + BANTAL * 2;
     }
 
-    /** Indeks tombol yang memuat titik ini, atau -1 bila pointer di luar tombol. */
     public static int aksiDi(JTable tabel, int kolom, Point titik) {
         int baris = tabel.rowAtPoint(titik);
         if (baris < 0 || baris >= tabel.getRowCount()) {
@@ -161,7 +131,6 @@ public final class GayaTabel {
         return -1;
     }
 
-    // hitung jumlah tombol aksi
     private static int jumlahTombol(JTable tabel, int kolom) {
         javax.swing.table.TableCellRenderer r =
                 tabel.getColumnModel().getColumn(kolom).getCellRenderer();
@@ -182,14 +151,12 @@ public final class GayaTabel {
                 indeks < 0 ? Cursor.DEFAULT_CURSOR : Cursor.HAND_CURSOR));
     }
 
-    // gambar ulang sel kolom aksi
     private static void gambarUlang(JTable tabel, int kolom, int baris) {
         if (baris >= 0 && baris < tabel.getRowCount()) {
             tabel.repaint(tabel.getCellRect(baris, kolom, false));
         }
     }
 
-    // cek nilai termasuk dalam array
     private static boolean mengandung(int[] angka, int nilai) {
         if (angka == null) {
             return false;
@@ -202,7 +169,6 @@ public final class GayaTabel {
         return false;
     }
 
-    // cari indeks kolom berjudul sama
     private static int kolomBernama(JTable tabel, String judul) {
         for (int i = 0; i < tabel.getColumnCount(); i++) {
             if (judul.equals(tabel.getColumnName(i))) {
@@ -212,7 +178,6 @@ public final class GayaTabel {
         return -1;
     }
 
-    // hitung total lebar semua kolom
     private static int totalLebar(JTable tabel) {
         int total = 0;
         for (int i = 0; i < tabel.getColumnCount(); i++) {
@@ -221,7 +186,6 @@ public final class GayaTabel {
         return total;
     }
 
-    // hitung posisi tombol di dalam sel
     private static Rectangle[] tombolDi(int lebarSel, int tinggiSel, int jumlah) {
         int total = LEBAR_TOMBOL * jumlah + JARAK * (jumlah - 1);
         int x = Math.max(6, lebarSel - total - BANTAL);

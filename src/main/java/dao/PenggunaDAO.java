@@ -14,7 +14,6 @@ public class PenggunaDAO {
           + "WHERE username = ? AND password = CAST(? AS BINARY)";
 
 
-    // cek login pengguna
     public Pengguna autentikasi(String username, String password) throws SQLException {
         return DatabaseConnection.query(SQL_AUTENTIKASI, ps -> {
             ps.setString(1, username);
@@ -25,7 +24,6 @@ public class PenggunaDAO {
         });
     }
 
-    // petakan baris hasil
     private Pengguna peta(ResultSet rs) throws SQLException {
         return new Pengguna(rs.getString("username"), rs.getString("nama_pengguna"),
                 rs.getString("role"));

@@ -8,11 +8,9 @@ public final class Pemeriksa {
 
     public static final long MAKS_HARGA = 99_999_999L;
 
-    // konstruktor privat util
     private Pemeriksa() {
     }
 
-    // validasi teks
     public static String teks(String nilai, String label, int maksimum) {
         String bersih = nilai == null ? "" : nilai.trim();
         if (bersih.isEmpty()) {
@@ -25,7 +23,6 @@ public final class Pemeriksa {
         return bersih;
     }
 
-    // validasi uang
     public static long uang(String nilai, String label, long minimum, long maksimum) {
         String bersih = nilai == null ? "" : nilai.trim();
         if (bersih.isEmpty()) {
@@ -48,7 +45,6 @@ public final class Pemeriksa {
         return hasil;
     }
 
-    // validasi barcode
     public static String barcode(String nilai) {
         String bersih = nilai == null ? "" : nilai.trim();
         if (bersih.isEmpty()) {
@@ -62,7 +58,6 @@ public final class Pemeriksa {
         return bersih;
     }
 
-    // validasi tanggal
     public static LocalDate tanggal(String nilai, String label) {
         String bersih = nilai == null ? "" : nilai.trim();
         LocalDate hasil;
@@ -78,7 +73,6 @@ public final class Pemeriksa {
         return hasil;
     }
 
-    // validasi rentang tanggal
     public static void rentang(LocalDate awal, LocalDate akhir, String labelAkhir) {
         if (akhir.isBefore(awal)) {
             throw new IllegalArgumentException(labelAkhir + " tidak boleh mendahului tanggal mulai.");

@@ -12,7 +12,6 @@ public class Stok {
 
     private String namaProduk;
 
-    // buat objek stok
     public Stok(String idStok, String barcode, int jumlah, LocalDate tglKedaluwarsa) {
         this.idStok = idStok;
         this.barcode = barcode;
@@ -20,37 +19,30 @@ public class Stok {
         this.tglKedaluwarsa = tglKedaluwarsa;
     }
 
-    // id stok
     public String getIdStok() {
         return idStok;
     }
 
-    // barcode produk
     public String getBarcode() {
         return barcode;
     }
 
-    // jumlah stok
     public int getJumlah() {
         return jumlah;
     }
 
-    // tanggal kedaluwarsa
     public LocalDate getTglKedaluwarsa() {
         return tglKedaluwarsa;
     }
 
-    // nama produk
     public String getNamaProduk() {
         return namaProduk;
     }
 
-    // simpan nama produk
     public void setNamaProduk(String namaProduk) {
         this.namaProduk = namaProduk;
     }
 
-    // sisa hari kedaluwarsa
     public long sisaHari() {
         return ChronoUnit.DAYS.between(LocalDate.now(), tglKedaluwarsa);
     }

@@ -16,33 +16,27 @@ public class RiwayatService {
 
     private final TransaksiDAO dao = new TransaksiDAO();
 
-    // cari riwayat sendiri
     public List<Transaksi> cari(LocalDate awal, LocalDate akhir, String jenis, String keyword)
             throws SQLException {
         return dao.cariByPengguna(Sesi.username(), awal, akhir, jenis, keyword);
     }
 
-    // detail satu transaksi
     public List<DetailTransaksi> cariDetail(int idTransaksi) throws SQLException {
         return dao.cariDetail(idTransaksi);
     }
 
-    // riwayat semua kasir
     public List<Transaksi> cariSemua(LocalDate awal, LocalDate akhir) throws SQLException {
         return dao.cariSemua(awal, akhir);
     }
 
-    // detail semua transaksi
     public List<DetailTransaksi> cariDetailSemua(LocalDate awal, LocalDate akhir) throws SQLException {
         return dao.cariDetailSemua(awal, akhir);
     }
 
-    // ambil data tagihan
     public TagihanTransaksi cariTagihan(int idTransaksi) throws SQLException {
         return dao.cariTagihan(idTransaksi);
     }
 
-    // cetak struk transaksi
     public String generateStruk(Transaksi trx) throws SQLException {
         StringBuilder sb = new StringBuilder();
         sb.append(garis()).append(tengah("FLATSMART")).append(tengah("Minimarket Terpercaya"))
@@ -90,34 +84,28 @@ public class RiwayatService {
         return sb.toString();
     }
 
-    // nama kasir tampilan
     private String namaKasir(Transaksi trx) {
         return Sesi.get() == null ? trx.getUsername() : Sesi.get().getNamaTampil();
     }
 
-    // garis pemisah struk
     private String garis() {
         return "=".repeat(LEBAR) + "\n";
     }
 
-    // garis dengan karakter
     private String garis(char karakter) {
         return String.valueOf(karakter).repeat(LEBAR) + "\n";
     }
 
-    // teks rata tengah
     private String tengah(String teks) {
         int sisa = LEBAR - teks.length();
         return sisa <= 0 ? teks + "\n" : " ".repeat(sisa / 2) + teks + "\n";
     }
 
-    // dua kolom struk
     private String kolom(String label, String angka) {
         int sisa = LEBAR - label.length() - angka.length();
         return sisa <= 0 ? label + " " + angka : label + " ".repeat(sisa) + angka;
     }
 
-    // potong teks panjang
     private String potong(String teks, int maksimal) {
         return teks.length() <= maksimal ? teks : teks.substring(0, maksimal - 1) + "...";
     }

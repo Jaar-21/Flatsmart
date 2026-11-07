@@ -25,7 +25,6 @@ public class PenjualanService {
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
 
 
-    // saran produk kasir
     public List<Produk> saranProduk(String keyword) throws SQLException {
         if (keyword == null || keyword.isBlank()) {
             return List.of();
@@ -40,7 +39,6 @@ public class PenjualanService {
         return hasil;
     }
 
-    // siapkan item keranjang
     public ItemKeranjang cariItem(String barcode, int jumlah) throws SQLException {
         if (barcode == null || barcode.isBlank()) {
             throw new IllegalArgumentException("Barcode tidak boleh kosong.");
@@ -74,7 +72,6 @@ public class PenjualanService {
         return item;
     }
 
-    // simpan transaksi penjualan
     public Transaksi proses(List<ItemKeranjang> keranjang, String metode, long uangDiterima)
             throws SQLException {
         if (keranjang == null || keranjang.isEmpty()) {
@@ -126,7 +123,6 @@ public class PenjualanService {
         return trx;
     }
 
-    // buat detail transaksi
     private DetailTransaksi detail(int idTransaksi, ItemKeranjang item) {
         DetailTransaksi d = new DetailTransaksi();
         d.setIdTransaksi(idTransaksi);

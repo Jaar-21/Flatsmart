@@ -67,32 +67,26 @@ public class LaporanDAO {
           + DARI_DETAIL + ANTAR_TANGGAL
           + "GROUP BY p.barcode, p.nama ORDER BY unit DESC";
 
-    // total omzet
     public long omzet(LocalDate awal, LocalDate akhir) throws SQLException {
         return jumlahSatuBaris(SQL_OMZET, awal, akhir);
     }
 
-    // jumlah transaksi
     public int jumlahTransaksi(LocalDate awal, LocalDate akhir) throws SQLException {
         return (int) jumlahSatuBaris(SQL_JUMLAH_TRANSAKSI, awal, akhir);
     }
 
-    // unit terjual
     public int unitTerjual(LocalDate awal, LocalDate akhir) throws SQLException {
         return (int) jumlahSatuBaris(SQL_UNIT, awal, akhir);
     }
 
-    // jenis produk terjual
     public int jenisProdukTerjual(LocalDate awal, LocalDate akhir) throws SQLException {
         return (int) jumlahSatuBaris(SQL_JENIS_PRODUK, awal, akhir);
     }
 
-    // total diskon
     public long totalDiskon(LocalDate awal, LocalDate akhir) throws SQLException {
         return jumlahSatuBaris(SQL_DISKON, awal, akhir);
     }
 
-    // tren omzet harian
     public Map<LocalDate, Long> trenOmzetHarian(LocalDate awal, LocalDate akhir) throws SQLException {
         Map<LocalDate, Long> tren = new LinkedHashMap<>();
         for (LocalDate hari = awal; !hari.isAfter(akhir); hari = hari.plusDays(1)) {
@@ -110,7 +104,6 @@ public class LaporanDAO {
         return tren;
     }
 
-    // rincian per produk
     public List<BarisAnalisis> rincianPerProduk(LocalDate awal, LocalDate akhir) throws SQLException {
         return DatabaseConnection.query(SQL_RINCIAN, ps -> {
             isiRentang(ps, awal, akhir);
@@ -126,7 +119,6 @@ public class LaporanDAO {
         });
     }
 
-    // riwayat produk terjual
     public List<PenjualanProduk> riwayatProduk(String barcode, LocalDate awal, LocalDate akhir)
             throws SQLException {
         return DatabaseConnection.query(SQL_RIWAYAT_PRODUK, ps -> {
@@ -152,7 +144,6 @@ public class LaporanDAO {
         });
     }
 
-    // ambil satu angka hasil
     private long jumlahSatuBaris(String sql, LocalDate awal, LocalDate akhir) throws SQLException {
         return DatabaseConnection.query(sql, ps -> {
             isiRentang(ps, awal, akhir);
@@ -163,7 +154,6 @@ public class LaporanDAO {
         });
     }
 
-    // isi batas tanggal
     private void isiRentang(java.sql.PreparedStatement ps, LocalDate awal, LocalDate akhir)
             throws SQLException {
         ps.setDate(1, Date.valueOf(awal));

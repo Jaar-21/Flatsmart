@@ -25,14 +25,12 @@ public class LaporanExportService {
     private final AnalisisService analisis;
     private final RiwayatService riwayat;
 
-    // siapkan dependensi ekspor
     public LaporanExportService(AnalisisService analisis, RiwayatService riwayat) {
         this.analisis = analisis;
         this.riwayat = riwayat;
     }
 
 
-    // export laporan excel
     public void ekspor(LocalDate awal, LocalDate akhir, File tujuan, String penyusun)
             throws SQLException, IOException {
         long omzet = analisis.omzet(awal, akhir);
@@ -52,7 +50,6 @@ public class LaporanExportService {
         w.simpan(tujuan);
     }
 
-    // lembar ringkasan periode
     private void ringkasan(ExcelWriter w, String periode, long omzet, long diskon,
                            int unit, int transaksi, int jenis, String penyusun) {
         ExcelWriter.Lembar s = w.lembarBaru("Ringkasan");
@@ -84,7 +81,6 @@ public class LaporanExportService {
         s.gabung(s.barisJumlah() - 1, 0, s.barisJumlah() - 1, 1);
     }
 
-    // lembar rincian produk
     private void rincian(ExcelWriter w, String periode, List<BarisAnalisis> rincian,
                          long omzet, long diskon, int unit) {
         ExcelWriter.Lembar s = w.lembarBaru("Rincian Produk");
@@ -124,7 +120,6 @@ public class LaporanExportService {
                 .kosong(ExcelWriter.LABEL);
     }
 
-    // lembar tren harian
     private void tren(ExcelWriter w, String periode, Map<LocalDate, Long> tren) {
         ExcelWriter.Lembar s = w.lembarBaru("Tren Harian");
         s.lebar(0, 16);
@@ -142,7 +137,6 @@ public class LaporanExportService {
         }
     }
 
-    // lembar daftar transaksi
     private void daftarTransaksi(ExcelWriter w, String periode, LocalDate awal, LocalDate akhir)
             throws SQLException {
         List<Transaksi> daftar = riwayat.cariSemua(awal, akhir);
@@ -210,7 +204,6 @@ public class LaporanExportService {
         s.gabung(barisCatatan, 0, barisCatatan, 12);
     }
 
-    // tulis baris transaksi
     private void barisTransaksi(ExcelWriter.Lembar s, int nomor, Transaksi trx, String produk,
                                 String batch, int qty, long harga, long diskon, long subtotal) {
         s.baris().teks(String.valueOf(nomor), ExcelWriter.TEKS)

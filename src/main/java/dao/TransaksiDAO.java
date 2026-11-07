@@ -66,7 +66,6 @@ public class TransaksiDAO {
             "SELECT id_transaksi, jenis_tagihan, no_pelanggan, nama_pelanggan, "
           + "nominal_tagihan, provider FROM transaksi_tagihan WHERE id_transaksi = ?";
 
-    /** Simpan header transaksi dan kembalikan id AUTO_INCREMENT hasil penyisipan. */
     public int simpanHeader(Transaksi t) throws SQLException {
         return DatabaseConnection.insertAmbilId(SQL_SIMPAN_HEADER, ps -> {
             ps.setString(1, t.getMetodeBayar());
@@ -78,7 +77,6 @@ public class TransaksiDAO {
         });
     }
 
-    // catat penjualan produk
     public void catatPenjualan(int idTransaksi, int jumlahUnit) throws SQLException {
         DatabaseConnection.update(SQL_SIMPAN_PRODUK, ps -> {
             ps.setInt(1, idTransaksi);
@@ -87,7 +85,6 @@ public class TransaksiDAO {
     }
 
 
-    // simpan detail transaksi
     public void simpanDetail(DetailTransaksi d) throws SQLException {
         DatabaseConnection.update(SQL_SIMPAN_DETAIL, ps -> {
             ps.setInt(1, d.getJumlah());
@@ -98,14 +95,9 @@ public class TransaksiDAO {
         });
     }
 
-    /**
-     * Jenis layanan yang sudah pernah muncul di transaksi_tagihan. Dibaca dari
-     * data, bukan dari tabel master, karena skema final tidak punya daftar jenis.
-     */
     public List<String> daftarJenisTagihan() throws SQLException {
         return DatabaseConnection.query(
                 "SELECT DISTINCT jenis_tagihan FROM transaksi_tagihan ORDER BY jenis_tagihan",
-            // kumpulkan jenis layanan
             ps -> {
                 List<String> hasil = new ArrayList<>();
                 try (ResultSet rs = ps.executeQuery()) {
@@ -117,12 +109,10 @@ public class TransaksiDAO {
             });
     }
 
-    /** Provider yang cocok untuk satu jenis layanan, mengikuti pasangan di data. */
     public List<String> daftarProviderTagihan(String jenis) throws SQLException {
         return DatabaseConnection.query(
                 "SELECT DISTINCT provider FROM transaksi_tagihan WHERE jenis_tagihan = ? "
               + "ORDER BY provider",
-            // kumpulkan provider
             ps -> {
                 ps.setString(1, jenis);
                 List<String> hasil = new ArrayList<>();
@@ -135,7 +125,6 @@ public class TransaksiDAO {
             });
     }
 
-    // simpan transaksi tagihan
     public void simpanTagihan(TagihanTransaksi tg) throws SQLException {
         DatabaseConnection.update(SQL_SIMPAN_TAGIHAN, ps -> {
             ps.setInt(1, tg.getIdTransaksi());
@@ -147,7 +136,6 @@ public class TransaksiDAO {
         });
     }
 
-    // cari riwayat per pengguna
     public List<Transaksi> cariByPengguna(String username, LocalDate awal, LocalDate akhir,
                                           String jenis, String keyword) throws SQLException {
         StringBuilder sql = new StringBuilder(PILIH_HEADER).append("WHERE t.pengguna_username = ? ");
@@ -190,16 +178,10 @@ public class TransaksiDAO {
         });
     }
 
-    /**
-     * Semua transaksi pada rentang tanggal tanpa filter pengguna. Laporan analisis
-     * berlaku untuk seluruh kasir, jadi daftar per transaksi tidak boleh dibatasi
-     * ke akun yang sedang login.
-     */
     public List<Transaksi> cariSemua(LocalDate awal, LocalDate akhir) throws SQLException {
         return DatabaseConnection.query(
                 PILIH_HEADER + "WHERE t.tanggal_transaksi >= ? AND t.tanggal_transaksi < ? "
               + "ORDER BY t.tanggal_transaksi ASC, t.id_transaksi ASC",
-            // kumpulkan semua transaksi
             ps -> {
                 ps.setDate(1, Date.valueOf(awal));
                 ps.setDate(2, Date.valueOf(akhir.plusDays(1)));
@@ -213,13 +195,11 @@ public class TransaksiDAO {
             });
     }
 
-    /** Seluruh baris item penjualan pada rentang tanggal, mengelompok per transaksi. */
     public List<DetailTransaksi> cariDetailSemua(LocalDate awal, LocalDate akhir) throws SQLException {
         return DatabaseConnection.query(
                 PILIH_DETAIL + "JOIN transaksi t ON t.id_transaksi = d.transaksi_produk_id_transaksi "
               + "WHERE t.tanggal_transaksi >= ? AND t.tanggal_transaksi < ? "
               + "ORDER BY t.tanggal_transaksi ASC, d.transaksi_produk_id_transaksi ASC, p.nama ASC",
-            // kumpulkan semua detail
             ps -> {
                 ps.setDate(1, Date.valueOf(awal));
                 ps.setDate(2, Date.valueOf(akhir.plusDays(1)));
@@ -233,10 +213,8 @@ public class TransaksiDAO {
             });
     }
 
-    // detail satu transaksi
     public List<DetailTransaksi> cariDetail(int idTransaksi) throws SQLException {
         return DatabaseConnection.query(PILIH_DETAIL + "WHERE d.transaksi_produk_id_transaksi = ?",
-            // kumpulkan detail transaksi
             ps -> {
                 ps.setInt(1, idTransaksi);
                 List<DetailTransaksi> hasil = new ArrayList<>();
@@ -249,7 +227,6 @@ public class TransaksiDAO {
             });
     }
 
-    // ambil data tagihan
     public TagihanTransaksi cariTagihan(int idTransaksi) throws SQLException {
         return DatabaseConnection.query(SQL_AMBIL_TAGIHAN, ps -> {
             ps.setInt(1, idTransaksi);
@@ -269,7 +246,6 @@ public class TransaksiDAO {
         });
     }
 
-    // petakan header transaksi
     private Transaksi petaHeader(ResultSet rs) throws SQLException {
         Transaksi t = new Transaksi();
         t.setIdTransaksi(rs.getInt("id_transaksi"));
@@ -291,7 +267,6 @@ public class TransaksiDAO {
         return t;
     }
 
-    // petakan detail transaksi
     private DetailTransaksi petaDetail(ResultSet rs) throws SQLException {
         DetailTransaksi d = new DetailTransaksi();
         d.setIdTransaksi(rs.getInt("transaksi_produk_id_transaksi"));

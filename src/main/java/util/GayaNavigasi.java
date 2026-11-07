@@ -16,11 +16,9 @@ public final class GayaNavigasi {
     private static final Color TEKS_REDA = new Color(190, 205, 230);
     private static final Color TEKS_TERANG = Color.WHITE;
 
-    // konstruktor privat util
     private GayaNavigasi() {
     }
 
-    // pasang efek hover menu
     public static void pasang(JButton... menu) {
         for (JButton tombol : menu) {
             tombol.setContentAreaFilled(false);
@@ -37,7 +35,6 @@ public final class GayaNavigasi {
         }
     }
 
-    // tandai menu aktif
     public static void tandaiAktif(JButton aktif, JButton... menu) {
         for (JButton tombol : menu) {
             tombol.putClientProperty(AKTIF, tombol == aktif);
@@ -45,7 +42,6 @@ public final class GayaNavigasi {
         }
     }
 
-    // warna tombol menu
     private static void warnakan(JButton tombol, boolean hover) {
         boolean aktif = Boolean.TRUE.equals(tombol.getClientProperty(AKTIF));
         if (aktif) {

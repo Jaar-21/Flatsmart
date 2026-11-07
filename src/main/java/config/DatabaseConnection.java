@@ -28,16 +28,13 @@ public final class DatabaseConnection {
     private final Deque<Connection> siapPakai = new ArrayDeque<>();
     private int koneksiHidup;
 
-    // konstruktor privat pool
     private DatabaseConnection() {
     }
 
-    // ambil instance pool
     public static DatabaseConnection instance() {
         return POOL;
     }
 
-    // cek koneksi database
     public static void periksaKoneksi() throws SQLException {
         query("SELECT 1", ps -> {
             try (ResultSet rs = ps.executeQuery()) {
@@ -47,7 +44,6 @@ public final class DatabaseConnection {
         });
     }
 
-    // jalankan dalam transaksi
     public static <T> T transaction(SqlWork<T> work) throws SQLException {
         if (TRANSAKSI.get() != null) {
             return work.run();
@@ -69,7 +65,6 @@ public final class DatabaseConnection {
         }
     }
 
-    // jalankan query
     public static <T> T query(String sql, PsWork<T> work) throws SQLException {
         if (TRANSAKSI.get() != null) {
             try (PreparedStatement ps = TRANSAKSI.get().prepareStatement(sql)) {
@@ -82,7 +77,6 @@ public final class DatabaseConnection {
         }
     }
 
-    // jalankan update
     public static int update(String sql, Binder bind) throws SQLException {
         return query(sql, ps -> {
             bind.bind(ps);
@@ -90,7 +84,6 @@ public final class DatabaseConnection {
         });
     }
 
-    // simpan dan ambil id baru
     public static int insertAmbilId(String sql, Binder bind) throws SQLException {
         if (TRANSAKSI.get() != null) {
             return sisip(TRANSAKSI.get(), sql, bind);
@@ -100,7 +93,6 @@ public final class DatabaseConnection {
         }
     }
 
-    // sisip baris baru
     private static int sisip(Connection c, String sql, Binder bind) throws SQLException {
         try (PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             bind.bind(ps);
@@ -117,7 +109,6 @@ public final class DatabaseConnection {
     }
 
 
-    // ambil koneksi dari pool
     private synchronized Connection buka() throws SQLException {
         long batasTunggu = System.currentTimeMillis() + BATAS_TUNGGU_MS;
         while (true) {
@@ -151,7 +142,6 @@ public final class DatabaseConnection {
         }
     }
 
-    // kembalikan koneksi ke pool
     private synchronized void kembalikan(Connection asli) {
         if (masihHidup(asli)) {
             siapPakai.addLast(asli);
@@ -162,7 +152,6 @@ public final class DatabaseConnection {
         notifyAll();
     }
 
-    // cek koneksi masih hidup
     private static boolean masihHidup(Connection c) {
         try {
             return !c.isClosed() && c.isValid(DETIK_VALID);
@@ -171,7 +160,6 @@ public final class DatabaseConnection {
         }
     }
 
-    // tutup koneksi tanpa peringatan
     private static void tutupSenyap(Connection c) {
         try {
             c.close();
@@ -181,7 +169,6 @@ public final class DatabaseConnection {
     }
 
 
-    // bungkus koneksi dengan proxy
     private Connection bungkus(Connection asli) {
         return (Connection) Proxy.newProxyInstance(DatabaseConnection.class.getClassLoader(),
                 new Class<?>[]{Connection.class}, new Peminjam(asli));

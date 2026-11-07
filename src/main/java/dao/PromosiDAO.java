@@ -34,7 +34,6 @@ public class PromosiDAO {
           + "WHERE kode_promosi = ?";
 
 
-    // kode promosi berikutnya
     public String buatKodeBerikutnya() throws SQLException {
         Integer tertinggi = DatabaseConnection.query(SQL_KODE_TERAKHIR, ps -> {
             try (ResultSet rs = ps.executeQuery()) {
@@ -44,7 +43,6 @@ public class PromosiDAO {
         return String.format("prm-%03d", (tertinggi == null ? 0 : tertinggi) + 1);
     }
 
-    // simpan promosi
     public void simpan(Promosi p, String pembuat) throws SQLException {
         DatabaseConnection.update(SQL_SIMPAN, ps -> {
             ps.setString(1, p.getKodePromosi());
@@ -56,7 +54,6 @@ public class PromosiDAO {
         });
     }
 
-    // ubah promosi
     public void ubah(Promosi p) throws SQLException {
         DatabaseConnection.update(SQL_UBAH, ps -> {
             ps.setString(1, p.getNamaPromosi());
@@ -67,13 +64,11 @@ public class PromosiDAO {
         });
     }
 
-    // hapus promosi
     public void hapus(String kodePromosi) throws SQLException {
         DatabaseConnection.update("DELETE FROM promosi WHERE kode_promosi = ?",
             ps -> ps.setString(1, kodePromosi));
     }
 
-    // cari promosi
     public List<Promosi> cari(String keyword, LocalDate tanggal) throws SQLException {
         StringBuilder sql = new StringBuilder(PILIH_PROMOSI).append("WHERE 1=1 ");
         List<String> kataKunci = new ArrayList<>();
@@ -103,12 +98,10 @@ public class PromosiDAO {
         });
     }
 
-    // promosi aktif per batch
     public Promosi cariAktifByStok(String idStok) throws SQLException {
         return DatabaseConnection.query(
                 PILIH_PROMOSI + "WHERE s.id_stok = ? AND pr.tanggal_mulai <= CURDATE() "
               + "AND pr.tanggal_selesai >= CURDATE()" + GRUP_PROMOSI,
-            // ambil promosi berlaku
             ps -> {
                 ps.setString(1, idStok);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -117,17 +110,14 @@ public class PromosiDAO {
             });
     }
 
-    // hitung total promosi
     public int hitungTotal() throws SQLException {
         return hitung("SELECT COUNT(*) FROM promosi");
     }
 
-    // hitung batch bertarget
     public int hitungBatchTarget() throws SQLException {
         return hitung("SELECT COUNT(*) FROM stok WHERE promosi_kode_promosi IS NOT NULL");
     }
 
-    // ambil satu angka hasil
     private int hitung(String sql) throws SQLException {
         return DatabaseConnection.query(sql, ps -> {
             try (ResultSet rs = ps.executeQuery()) {
@@ -137,7 +127,6 @@ public class PromosiDAO {
         });
     }
 
-    // kumpulkan daftar promosi
     private List<Promosi> kumpulkan(java.sql.PreparedStatement ps) throws SQLException {
         List<Promosi> hasil = new ArrayList<>();
         try (ResultSet rs = ps.executeQuery()) {
@@ -148,7 +137,6 @@ public class PromosiDAO {
         return hasil;
     }
 
-    // petakan baris promosi
     private Promosi peta(ResultSet rs) throws SQLException {
         Promosi p = new Promosi(rs.getString("kode_promosi"), rs.getString("nama"),
                 rs.getString("id_stok"), rs.getInt("diskon"),

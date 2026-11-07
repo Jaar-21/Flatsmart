@@ -10,7 +10,6 @@ public class AuthService {
     private final PenggunaDAO dao = new PenggunaDAO();
 
 
-    // proses login
     public Pengguna login(String username, String password) throws SQLException {
         if (username == null || username.isBlank() || password == null || password.isEmpty()) {
             throw new IllegalArgumentException("Username dan password wajib diisi.");
@@ -29,7 +28,6 @@ public class AuthService {
         return pengguna;
     }
 
-    // keluar sesi
     public void logout() {
         Sesi.keluar();
     }

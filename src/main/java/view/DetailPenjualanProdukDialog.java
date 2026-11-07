@@ -7,15 +7,10 @@ import model.PenjualanProduk;
 import util.Format;
 import util.GayaTabel;
 
-/**
- * Dialog bawaan klik-ganda baris "Rincian penjualan per produk": seluruh transaksi
- * satu produk pada rentang tanggal yang sedang ditampilkan di layar Analisis.
- */
 public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
 
     private static final int[] LEBAR_KOLOM = {152, 88, 116, 66, 84, 50, 96, 92, 102};
 
-    // detail transaksi produk
     public DetailPenjualanProdukDialog(java.awt.Window parent, String namaProduk, String barcode,
                                        LocalDate awal, LocalDate akhir,
                                        List<PenjualanProduk> riwayat) {
@@ -35,7 +30,6 @@ public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
     }
 
-    // tinggi tabel dibulatkan ke baris penuh agar tidak ada baris terpotong
     private void bulatkanTinggiTabel() {
         int tinggiBaris = tblRiwayat.getRowHeight();
         if (tinggiBaris <= 0) return;
@@ -61,7 +55,6 @@ public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
         setLocationRelativeTo(getOwner());
     }
 
-    // muat tabel riwayat
     private void muatTabel(List<PenjualanProduk> riwayat) {
         DefaultTableModel model = new DefaultTableModel(
             new String[]{"Waktu", "ID Transaksi", "Kasir", "Bayar", "Batch", "Unit",
@@ -85,7 +78,6 @@ public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
         }
     }
 
-    /** This method is called from within the constructor to initialize the form. */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -168,12 +160,10 @@ public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // tombol tutup
     private void btnTutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutupActionPerformed
         dispose();
     }//GEN-LAST:event_btnTutupActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTutup;
     private javax.swing.JLabel lblJudul;
     private javax.swing.JLabel lblSub;
@@ -182,5 +172,4 @@ public class DetailPenjualanProdukDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JScrollPane scrollTabel;
     private javax.swing.JTable tblRiwayat;
-    // End of variables declaration//GEN-END:variables
 }

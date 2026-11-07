@@ -37,7 +37,6 @@ public class ProdukDAO {
           + "JOIN stok s ON s.id_stok = d.stok_id_stok "
           + "WHERE s.produk_barcode = ? LIMIT 1";
 
-    // cari via barcode
     public Produk cariByBarcode(String barcode) throws SQLException {
         return DatabaseConnection.query(SQL_CARI_BARCODE, ps -> {
             ps.setString(1, barcode);
@@ -47,7 +46,6 @@ public class ProdukDAO {
         });
     }
 
-    // cari produk
     public List<Produk> cari(String keyword, String filterStok) throws SQLException {
         StringBuilder sql = new StringBuilder(PILIH_DENGAN_STOK).append("WHERE 1=1 ");
         List<String> kataKunci = new ArrayList<>();
@@ -82,7 +80,6 @@ public class ProdukDAO {
         });
     }
 
-    // simpan produk
     public void simpan(Produk p, String pembuat) throws SQLException {
         DatabaseConnection.update(SQL_SIMPAN, ps -> {
             ps.setString(1, p.getBarcode());
@@ -93,7 +90,6 @@ public class ProdukDAO {
         });
     }
 
-    // ubah produk
     public void ubah(Produk p) throws SQLException {
         DatabaseConnection.update(SQL_UBAH, ps -> {
             ps.setString(1, p.getNamaProduk());
@@ -103,7 +99,6 @@ public class ProdukDAO {
         });
     }
 
-    // cek produk pernah terjual
     public boolean pernahDitransaksikan(String barcode) throws SQLException {
         return Boolean.TRUE.equals(DatabaseConnection.query(SQL_PERNAH_TERJUAL, ps -> {
             ps.setString(1, barcode);
@@ -113,7 +108,6 @@ public class ProdukDAO {
         }));
     }
 
-    // hapus produk
     public void hapus(String barcode) throws SQLException {
         DatabaseConnection.transaction(() -> {
             DatabaseConnection.update("DELETE FROM stok WHERE produk_barcode = ?",
@@ -124,23 +118,19 @@ public class ProdukDAO {
         });
     }
 
-    // hitung jumlah produk
     public int hitungProduk() throws SQLException {
         return ambilSatuInt("SELECT COUNT(*) FROM produk");
     }
 
-    // hitung stok menipis
     public int hitungMenipis() throws SQLException {
         return ambilSatuInt("SELECT COUNT(*) FROM (" + PILIH_DENGAN_STOK
                 + "GROUP BY p.barcode HAVING stok_total BETWEEN 1 AND " + BATAS_MENIPIS + ") sub");
     }
 
-    /** Total unit pada seluruh batch stok. */
     public int totalUnit() throws SQLException {
         return ambilSatuInt("SELECT COALESCE(SUM(stok), 0) FROM stok");
     }
 
-    // ambil satu angka hasil
     private int ambilSatuInt(String sql) throws SQLException {
         return DatabaseConnection.query(sql, ps -> {
             try (ResultSet rs = ps.executeQuery()) {
@@ -150,7 +140,6 @@ public class ProdukDAO {
         });
     }
 
-    // petakan baris produk
     private Produk peta(ResultSet rs) throws SQLException {
         Produk p = new Produk(rs.getString("barcode"), rs.getString("nama"),
                 rs.getLong("harga_beli"), rs.getLong("harga_jual"));

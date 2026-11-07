@@ -16,7 +16,6 @@ public class TagihanService {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
 
-    // simpan transaksi tagihan
     public Transaksi proses(String jenisLayanan, String provider, String noPelanggan,
                             String namaPelanggan, long nominal, String metode, long uangDiterima)
             throws SQLException {
@@ -69,12 +68,10 @@ public class TagihanService {
         return trx;
     }
 
-    /** Jenis layanan yang pernah ada di data, dipakai sebagai opsi dropdown. */
     public List<String> daftarJenis() throws SQLException {
         return transaksiDAO.daftarJenisTagihan();
     }
 
-    /** Provider yang pernah dipakai untuk satu jenis layanan. */
     public List<String> daftarProvider(String jenis) throws SQLException {
         return transaksiDAO.daftarProviderTagihan(jenis);
     }

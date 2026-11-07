@@ -113,13 +113,11 @@ public final class SaranKetik {
         return new SaranKetik(kolom, lebar, tinggi, minimum, pencari, pilihan);
     }
 
-    // pilih salah satu saran
     private void pilih(int indeks) {
         sembunyikan();
         pilihan.pilih(indeks);
     }
 
-    // jadwalkan muat saran
     private void jedaMuat() {
         if (kolom.getText().trim().length() < minimum) {
             sembunyikan();
@@ -128,7 +126,6 @@ public final class SaranKetik {
         jeda.restart();
     }
 
-    // muat saran
     private void muat() {
         String keyword = kolom.getText().trim();
         if (keyword.length() < minimum || !kolom.hasFocus()) {
@@ -153,7 +150,6 @@ public final class SaranKetik {
         }
     }
 
-    // geser sorotan saran
     private void geser(int delta) {
         int n = isiModel.getSize();
         if (n == 0) {
@@ -165,23 +161,19 @@ public final class SaranKetik {
         daftar.ensureIndexIsVisible(baru);
     }
 
-    // sembunyikan saran
     public void sembunyikan() {
         jeda.stop();
         popup.setVisible(false);
     }
 
-    // cek saran sedang terbuka
     public boolean terbuka() {
         return popup.isVisible();
     }
 
-    // ambil indeks terpilih
     public int indeksTerpilih() {
         return daftar.getSelectedIndex();
     }
 
-    // pilih saran yang sedang sorot
     public void pilihTerpilih() {
         int i = daftar.getSelectedIndex();
         if (i >= 0) {

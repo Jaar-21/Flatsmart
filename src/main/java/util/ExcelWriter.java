@@ -31,14 +31,12 @@ public class ExcelWriter {
 
     private final List<Lembar> lembar = new ArrayList<>();
 
-    // buat lembar baru
     public Lembar lembarBaru(String nama) {
         Lembar l = new Lembar(nama, lembar.size());
         lembar.add(l);
         return l;
     }
 
-    // simpan berkas excel
     public void simpan(File tujuan) throws IOException {
         try (OutputStream os = new FileOutputStream(tujuan);
              ZipOutputStream zip = new ZipOutputStream(os, StandardCharsets.UTF_8)) {
@@ -53,14 +51,12 @@ public class ExcelWriter {
         }
     }
 
-    // tulis entri zip
     private static void tulis(ZipOutputStream zip, String nama, String isi) throws IOException {
         zip.putNextEntry(new ZipEntry(nama));
         zip.write(isi.getBytes(StandardCharsets.UTF_8));
         zip.closeEntry();
     }
 
-    // susun xml content types
     private String contentTypes() {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
@@ -76,7 +72,6 @@ public class ExcelWriter {
         return sb.append("</Types>").toString();
     }
 
-    // susun xml rels
     private String rels() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
              + "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\">"
@@ -84,7 +79,6 @@ public class ExcelWriter {
              + "</Relationships>";
     }
 
-    // susun xml workbook
     private String workbook() {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
@@ -98,7 +92,6 @@ public class ExcelWriter {
         return sb.append("</sheets></workbook>").toString();
     }
 
-    // susun xml rels workbook
     private String workbookRels() {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
@@ -114,7 +107,6 @@ public class ExcelWriter {
         return sb.append("</Relationships>").toString();
     }
 
-    // susun xml styles
     private static String styles() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
              + "<styleSheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\">"
@@ -143,8 +135,6 @@ public class ExcelWriter {
              + "</borders>"
              + "<cellStyleXfs count=\"1\"><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\"/></cellStyleXfs>"
              + "<cellXfs count=\"11\">"
-             // urutan gaya: 0 baku, 1 judul, 2 subjek, 3 kepala tabel, 4 teks, 5 angka,
-             // 6 rupiah, 7 label, 8 nilai, 9 tanggal, 10 tulisan halus
              + "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>"
              + "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"><alignment vertical=\"center\"/></xf>"
              + "<xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>"
@@ -173,42 +163,35 @@ public class ExcelWriter {
         private final int[] lebarKolom = new int[26];
         private final List<String> gabungan = new ArrayList<>();
 
-        // konstruktor lembar
         private Lembar(String nama, int index) {
             this.nama = nama;
             this.index = index;
         }
 
-        // jumlah baris
         public int barisJumlah() {
             return baris.size();
         }
 
-        // tambah baris baru
         public Baris baris() {
             Baris b = new Baris(baris.size());
             baris.add(b);
             return b;
         }
 
-        // tambah baris kosong
         public void barisKosong() {
             baris.add(new Baris(baris.size()));
         }
 
-        // atur lebar kolom
         public void lebar(int kolom, int px) {
             if (kolom >= 0 && kolom < lebarKolom.length) {
                 lebarKolom[kolom] = px;
             }
         }
 
-        /** Gabungkan rentang sel, koordinat 0-based (baris/kolom). */
         public void gabung(int br1, int bc1, int br2, int bc2) {
             gabungan.add(ref(br1, bc1) + ":" + ref(br2, bc2));
         }
 
-        // susun xml lembar
         private String xml() {
             StringBuilder sb = new StringBuilder();
             sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
@@ -241,42 +224,35 @@ public class ExcelWriter {
         private final List<Sel> sel = new ArrayList<>();
         private int kolom = 0;
 
-        // konstruktor baris
         private Baris(int nomorBaris) {
             this.nomorBaris = nomorBaris;
         }
 
-        // isi sel teks
         public Baris teks(String nilai, int gaya) {
             sel.add(Sel.str(kolom++, nomorBaris, nilai, gaya));
             return this;
         }
 
-        // isi sel angka
         public Baris angka(long nilai, int gaya) {
             sel.add(Sel.num(kolom++, nomorBaris, nilai, gaya));
             return this;
         }
 
-        // isi sel tanggal
         public Baris tanggal(LocalDate nilai, int gaya) {
             sel.add(Sel.num(kolom++, nomorBaris, ChronoUnit.DAYS.between(EPOK_EXCEL, nilai), gaya));
             return this;
         }
 
-        // isi sel kosong
         public Baris kosong(int gaya) {
             sel.add(Sel.str(kolom++, nomorBaris, "", gaya));
             return this;
         }
 
-        // lewati satu kolom
         public Baris lewati() {
             kolom++;
             return this;
         }
 
-        // susun xml baris
         String xml() {
             StringBuilder sb = new StringBuilder();
             sb.append("<row r=\"").append(nomorBaris + 1).append("\">");
@@ -287,14 +263,10 @@ public class ExcelWriter {
         }
     }
 
-    // isi satu sel spreadsheet
     private record Sel(int kolom, int baris, String nilai, Long angka, boolean numerik, int gaya) {
-        // buat sel teks
         static Sel str(int k, int b, String v, int g) { return new Sel(k, b, v, null, false, g); }
-        // buat sel angka
         static Sel num(int k, int b, long v, int g)   { return new Sel(k, b, null, v, true, g); }
 
-        // susun xml sel
         String xml() {
             String r = ref(baris, kolom);
             if (numerik) {
@@ -308,12 +280,10 @@ public class ExcelWriter {
         }
     }
 
-    // referensi koordinat sel
     private static String ref(int baris, int kolom) {
         return huruf(kolom) + (baris + 1);
     }
 
-    // huruf nama kolom
     private static String huruf(int kolom) {
         StringBuilder sb = new StringBuilder();
         int k = kolom;
@@ -324,7 +294,6 @@ public class ExcelWriter {
         return sb.toString();
     }
 
-    // escape karakter xml
     private static String kabahkan(String s) {
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 .replace("\"", "&quot;");
