@@ -521,11 +521,8 @@ flatsmart/
 ├── nbactions.xml                   # Runner Script NetBeans (exec-maven-plugin)
 ├── db_flatsmart.sql                # Skema DDL & Data Dummy Lengkap (8 Tabel)
 ├── lib/                            # Pustaka lokal (AbsoluteLayout SNAPSHOT)
-├── docs/                           # Dokumentasi Arsitektur, Flowchart, Use-Case & Gambar
-│   ├── arsitektur.md
-│   ├── flowchart.md
-│   ├── use-case.md
-│   └── gambar/                     # Aset Gambar Dokumentasi & Tangkapan Layar
+├── docs/                           # Dokumentasi Visual & Tangkapan Layar
+│   └── gambar/                     # Aset Gambar README (fitur, penggunaan, perancangan)
 └── src/main/
     ├── java/
     │   ├── main/                   # [ENTRY POINT] Main.java, khusus menjalankan aplikasi
@@ -755,9 +752,6 @@ Proyek ini dikembangkan oleh tim mahasiswa **Program Studi Sistem Informasi, Fak
 
 ## 📎 Dokumen Referensi & Lampiran
 
-- 📐 **Dokumen Arsitektur Lengkap**: [`docs/arsitektur.md`](docs/arsitektur.md)
-- 📊 **Source Flowchart (Mermaid Source)**: [`docs/flowchart.md`](docs/flowchart.md)
-- 👤 **Dokumentasi Skenario Use Case**: [`docs/use-case.md`](docs/use-case.md)
 - 🗄️ **Skema Basis Data DDL & DML**: [`db_flatsmart.sql`](db_flatsmart.sql)
 - 🖼️ **Daftar Lengkap Aset Gambar README**: [`docs/gambar/`](docs/gambar)
 
